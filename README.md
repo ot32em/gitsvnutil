@@ -23,9 +23,20 @@
 
 Clone svn repo from scratch, and recursively clone externals.
 
+
 ```
 $ cd /projects
 $ gs-clone https://mysvn.com/repo/catmonitor catmonitor
+```
+
+Execute like:
+```
+git svn clone YOUR_REPO YOUR_CLONE_DIR
+cd YOUR_CLONE_DIR
+git svn show-externals
+	cd EXTERNAL_DIR1
+	git svn clone REPO_URL1 CLONDE_DIR1
+	... (recursviely)
 ```
 
 
@@ -38,6 +49,13 @@ $ cd /projects/catmonitor
 $ gs-clone
 ```
 
+Execute like:
+```
+git svn show-externals
+	cd EXTERNAL_DIR1
+	git svn clone REPO_URL1 CLONDE_DIR1
+	... (recursively)
+```
 
 ## gs-update
 
@@ -48,6 +66,19 @@ Addtionally call `git stash` before and `git stash pop` after in case of unstage
 ```
 $ cd /projects/catmonitor
 $ gs-update
+```
+
+Execute like
+```
+git stash
+git svn rebase
+git stash pop
+git svn show-externals
+	cd CLONE_DIR1
+	git stash
+	git svn rebase
+	git stash pop
+	(recrusively...)
 ```
 
 ## gs-ls
@@ -61,6 +92,14 @@ $ cd /projects/catmonitor
 $ gs-ls
 /projects/catmonitor/SDK https://mysvn.com/repo/cat-food cat-food /projects/catmonitor/SDK/cat-food
 /projects/catmonitor/SDK https://mysvn.com/repo/cat-log tools/cat-food /projects/catmonitor/SDK/tools/cat-food
+```
+
+Execute like
+```
+git svn show-externals | 
+	while read -r LINE; do
+		... regular expression capture LINE, format to 4 tokens
+	done
 ```
 
 ### gs-ls 1, gs-ls 2, gs-ls 3, gs-ls 4
@@ -107,5 +146,11 @@ $ gs-url catmonitor
 https://mysvn.com/repo/catmonitor
 ```
 
+Execute like
+```
+git svn info 		     # show full git svn meta data including URL at second row
+	 | head -2 | tail -1 # get the second row
+	 | cut -c6- 	     # skip heading "URL: "
+```
 
 
