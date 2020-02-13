@@ -8,9 +8,11 @@ git stash
 git svn rebase
 git stash pop
 
+sh $full_gs_lsext 4 
 sh $full_gs_lsext 4 | 
 	while read clone_dir; do 
-		pushd $clone_dir > /dev/null
+		if [ ! -d $clone_dir ]; then continue; fi
+		pushd $clone_dir > /dev/null || continue
 		eval $full_0
 		popd > /dev/null
 	done
