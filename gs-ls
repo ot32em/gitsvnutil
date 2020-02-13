@@ -1,6 +1,6 @@
 #!/bin/bash
-pwd_dir="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-full_gs_splitext="${pwd_dir}/gs-splitext"
+full_dir=`cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P`
+full_gs_splitext="${full_dir}/gs-splitext"
 
 if [ -z $1 ]; then 
 	git svn show-externals | sh $full_gs_splitext

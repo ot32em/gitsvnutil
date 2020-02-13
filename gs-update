@@ -1,15 +1,14 @@
 #!/bin/bash
-pwd_dir="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-full_0="${pwd_dir}/$(basename $0)"
-full_gs_lsext="${pwd_dir}/gs-lsext"
+full_dir=`cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P`
+full_0="${full_dir}/`basename $0`"
+full_gs_ls="${full_dir}/gs-ls"
 
 
 git stash
 git svn rebase
 git stash pop
 
-sh $full_gs_lsext 4 
-sh $full_gs_lsext 4 | 
+sh $full_gs_ls 4 | 
 	while read clone_dir; do 
 		if [ ! -d $clone_dir ]; then continue; fi
 		pushd $clone_dir > /dev/null || continue

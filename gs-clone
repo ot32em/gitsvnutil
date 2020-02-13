@@ -1,10 +1,10 @@
 #!/bin/bash
 full_dir=`cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P`
 full_0="${full_dir}/`basename $0`"
-full_gs_ls_ext="${full_dir}/gs-lsext"
+full_gs_ls="${full_dir}/gs-ls"
 
 git_svn_clone_children() {
-	sh $full_gs_ls_ext | 
+	sh $full_gs_ls | 
 		while read line; do 
 			# ls_git_svn_externals.sh gives "SUB_DIR REPO_URL CLONE_DIR CLONE_FULL_DIR"
 			words=(${line})
