@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -z $1 ]; then 
+	git svn show-externals | sh gs-splitext
+elif [[ $1 =~ ^[0-9] ]]; then
+	git svn show-externals | sh gs-splitext | cut -d ' ' -f $1
+fi
+

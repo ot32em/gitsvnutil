@@ -1,0 +1,27 @@
+#!/bin/bash
+full_path_cmd="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )/$(basename $0)"
+
+git_svn_clone_children() {
+	gs-lsext | 
+		while read line; do 
+			# ls_git_svn_externals.sh gives "SUB_DIR REPO_URL CLONE_DIR CLONE_FULL_DIR"
+			words=(${line})
+			repo_r=${words[1]}
+			clone_dir_r=${words[3]}
+			
+			eval "$full_path_cmd $repo_r $clone_dir_r"
+		done
+}
+
+if [[ $1 ]] && [[ $2 ]]; then 
+	git svn clone $1 $2 || exit
+	pushd $2> /dev/null
+		git_svn_clone_children
+	popd > /dev/null
+
+elif [[ $1 ]]; then
+	echo "Usage: gs-clone REPO_URL CLONE_DIR or gs-clone to only clone externals"
+	exit;
+else
+	git_svn_clone_children
+fi
