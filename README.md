@@ -50,7 +50,7 @@ $ cd /projects/catmonitor
 $ gs-update
 ```
 
-## gs-lsext
+## gs-ls
 
 Format the git `svn show-externals`. Span all externals and parse into 4 tokens separated by space.
 
@@ -58,28 +58,28 @@ Format the git `svn show-externals`. Span all externals and parse into 4 tokens 
 
 ```
 $ cd /projects/catmonitor
-$ gs-lsext
+$ gs-ls
 /projects/catmonitor/SDK https://mysvn.com/repo/cat-food cat-food /projects/catmonitor/SDK/cat-food
 /projects/catmonitor/SDK https://mysvn.com/repo/cat-log tools/cat-food /projects/catmonitor/SDK/tools/cat-food
 ```
 
-### gs-lsext 1, gs-lsext 2, gs-lsext 3, gs-lsext 4
+### gs-ls 1, gs-ls 2, gs-ls 3, gs-ls 4
 
 Get the nth field of gs-lsext. (Call `| cut -d ' ' -f n` internally)
 
 
 ```
 $ cd /projects/catmonitor
-$ gs-lsext 1
+$ gs-ls 1
 /projects/catmonitor/SDK
 /projects/catmonitor/SDK
-$ gs-lsext 2
+$ gs-ls 2
 https://mysvn.com/repo/cat-food
 https://mysvn.com/repo/cat-log
-$ gs-lsext 3
+$ gs-ls 3
 cat-food
 tools/cat-food
-$ gs-lsext 4
+$ gs-ls 4
 /projects/catmonitor/SDK/cat-food
 /projects/catmonitor/SDK/tools/cat-food
 ```
