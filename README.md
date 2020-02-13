@@ -21,9 +21,8 @@
 
 ## gs-clone `YOUR_REPO` `YOUR_CLONE_DIR`
 
-Clone svn repo from scratch, and recursively clone externals
+Clone svn repo from scratch, and recursively clone externals.
 
-#### Usage
 ```
 $ cd /projects
 $ gs-clone https://mysvn.com/repo/catmonitor catmonitor
@@ -32,14 +31,13 @@ $ gs-clone https://mysvn.com/repo/catmonitor catmonitor
 
 ## gs-clone
 
-Recursively clone externals of current svn
+Recursively clone externals of **current svn**.
 
-
-### Usage
 ```
 $ cd /projects/catmonitor
 $ gs-clone
 ```
+
 
 ## gs-update
 
@@ -47,16 +45,10 @@ Call `git svn rebase` at current directory and  directories of externals of curr
 
 Addtionally call git stash before and git stash pop after in case of unstaged changes.
 
-
-#### Usage
 ```
 $ cd /projects/catmonitor
 $ gs-update
 ```
-
---
-
-# Tools
 
 ## gs-lsext
 
@@ -64,8 +56,6 @@ Format the git `svn show-externals`. Span all externals and parse into 4 tokens 
 
     FULL_DIR_WITH_EXTERNAL REPOSITORY_URL EXTERNAL_SUBDIR EXTERNAL_FULLDIR
 
-
-#### Usage
 ```
 $ cd /projects/catmonitor
 $ gs-lsext
