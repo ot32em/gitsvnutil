@@ -1,5 +1,5 @@
 #!/bin/bash
-full_path_cmd="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )/$(basename $0)"
+full_0="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )/$(basename $0)"
 
 git_svn_clone_children() {
 	gs-lsext | 
@@ -9,7 +9,7 @@ git_svn_clone_children() {
 			repo_r=${words[1]}
 			clone_dir_r=${words[3]}
 			
-			eval "$full_path_cmd $repo_r $clone_dir_r"
+			eval "$full_0 $repo_r $clone_dir_r"
 		done
 }
 
