@@ -1,8 +1,10 @@
 #!/bin/bash
+pwd_dir="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+full_gs_splitext="${pwd_dir}/gs-splitext"
 
 if [ -z $1 ]; then 
-	git svn show-externals | sh gs-splitext
+	git svn show-externals | sh $full_gs_splitext
 elif [[ $1 =~ ^[0-9] ]]; then
-	git svn show-externals | sh gs-splitext | cut -d ' ' -f $1
+	git svn show-externals | sh $full_gs_splitext | cut -d ' ' -f $1
 fi
 

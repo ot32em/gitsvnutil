@@ -1,15 +1,17 @@
 #!/bin/bash
-full_path_cmd="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )/$(basename $0)"
+pwd_dir="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+full_0="${pwd_dir}/$(basename $0)"
+full_gs_lsext="${pwd_dir}/$(basename $0)"
 
 
 git stash
 git svn rebase
 git stash pop
 
-gs-lsext 4 | 
+sh $full_gs_lsext 4 | 
 	while read clone_dir; do 
 		pushd $clone_dir > /dev/null
-		eval $full_path_cmd
+		eval $full_0
 		popd > /dev/null
 	done
 
