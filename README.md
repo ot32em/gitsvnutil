@@ -19,7 +19,7 @@
              * cat-log.c
 ```
 
-## gs-clone `YOUR_REPO` `YOUR_CLONE_DIR`
+## `gs-clone` `YOUR_REPO` `YOUR_CLONE_DIR`
 
 Clone svn repo from scratch, and recursively clone externals.
 
@@ -29,18 +29,18 @@ $ cd /projects
 $ gs-clone https://mysvn.com/repo/catmonitor catmonitor
 ```
 
-Execute like:
+**Equivalent to**
 ```
 git svn clone YOUR_REPO YOUR_CLONE_DIR
 cd YOUR_CLONE_DIR
 git svn show-externals
 	cd EXTERNAL_DIR1
 	git svn clone REPO_URL1 CLONDE_DIR1
-	... (recursviely)
+	(recursively ...)
 ```
 
 
-### gs-clone
+### `gs-clone`
 
 Recursively clone externals of **current svn** .
 
@@ -49,15 +49,15 @@ $ cd /projects/catmonitor
 $ gs-clone
 ```
 
-Execute like:
+**Equivalent to**
 ```
 git svn show-externals
 	cd EXTERNAL_DIR1
 	git svn clone REPO_URL1 CLONDE_DIR1
-	... (recursively)
+	(recursively ...)
 ```
 
-## gs-update
+## `gs-update`
 
 Call `git svn rebase` at current directory and  directories of externals of current svn recursively.
 
@@ -68,7 +68,7 @@ $ cd /projects/catmonitor
 $ gs-update
 ```
 
-Execute like
+**Equivalent to**
 ```
 git stash
 git svn rebase
@@ -78,10 +78,10 @@ git svn show-externals
 	git stash
 	git svn rebase
 	git stash pop
-	(recrusively...)
+	(recursively ...)
 ```
 
-## gs-ls
+## `gs-ls`
 
 Format the git `svn show-externals`. Span all externals and parse into 4 tokens separated by space.
 
@@ -94,15 +94,15 @@ $ gs-ls
 /projects/catmonitor/SDK https://mysvn.com/repo/cat-log tools/cat-food /projects/catmonitor/SDK/tools/cat-food
 ```
 
-Execute like
+**Equivalent to**
 ```
 git svn show-externals | 
 	while read -r LINE; do
-		... regular expression capture LINE, format to 4 tokens
+		... regular expression capture LINE BY LINE and format to 4 tokens ...
 	done
 ```
 
-### gs-ls 1, gs-ls 2, gs-ls 3, gs-ls 4
+### `gs-ls n`
 
 Get the nth field of gs-lsext. (Call `| cut -d ' ' -f n` internally)
 
@@ -124,19 +124,24 @@ $ gs-ls 4
 ```
 
 
-## gs-splitext
+**Equivalent to**
+```
+gs-ls | cut -d ' ' -f n
+```
+
+## `gs-split`
 
 Parse output of `git svn show-externals` from stdin. Usually used after pipe.
 
 ```
 $ cd /projects/catmonitor
-$ git svn show-externals | gs-splitext
+$ git svn show-externals | gs-split
 /projects/catmonitor/SDK https://mysvn.com/repo/cat-food cat-food /projects/catmonitor/SDK/cat-food
 /projects/catmonitor/SDK https://mysvn.com/repo/cat-log tools/cat-food /projects/catmonitor/SDK/tools/cat-food
 ```
 
 
-## gs-url
+## `gs-url`
 
 Show svn repository url of the svn directory. (Parse the output of `git svn info`)
 
@@ -146,7 +151,7 @@ $ gs-url catmonitor
 https://mysvn.com/repo/catmonitor
 ```
 
-Execute like
+**Equivalent to**
 ```
 git svn info 		     # show full git svn meta data including URL at second row
 	 | head -2 | tail -1 # get the second row
