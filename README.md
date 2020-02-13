@@ -1,7 +1,7 @@
-# gitsvnutil
-shell scripts to handle git svn externals recursively
+# Shell scripts to handle git svn externals recursively
 
-# psudo structure
+
+## Example structure
 
 ```
 /projects
@@ -19,13 +19,11 @@ shell scripts to handle git svn externals recursively
              * cat-log.c
 ```
 
-# Deploy
+## gs-clone `YOUR_REPO` `YOUR_CLONE_DIR`
 
-## gs-clone YOUR_REPO YOUR_CLONE_DIR 
+Clone svn repo from scratch, and recursively clone externals
 
-Desc: Clone svn repo from scratch, and recursively clone externals
-
-### Usage
+#### Usage
 ```
 $ cd /projects
 $ gs-clone https://mysvn.com/repo/catmonitor catmonitor
@@ -34,7 +32,8 @@ $ gs-clone https://mysvn.com/repo/catmonitor catmonitor
 
 ## gs-clone
 
-Desc: Recursively clone externals of current svn
+Recursively clone externals of current svn
+
 
 ### Usage
 ```
@@ -44,15 +43,16 @@ $ gs-clone
 
 ## gs-update
 
-Desc: Call `git svn rebase` at current directory and  directories of externals of current svn recursively.
-Note: Addtionally call git stash before and git stash pop after in case of unstaged changes.
+Call `git svn rebase` at current directory and  directories of externals of current svn recursively.
 
-### Usage
+Addtionally call git stash before and git stash pop after in case of unstaged changes.
+
+
+#### Usage
 ```
 $ cd /projects/catmonitor
 $ gs-update
 ```
-
 
 --
 
@@ -60,14 +60,12 @@ $ gs-update
 
 ## gs-lsext
 
-Desc: 
-
 Format the git `svn show-externals`. Span all externals and parse into 4 tokens separated by space.
 
     FULL_DIR_WITH_EXTERNAL REPOSITORY_URL EXTERNAL_SUBDIR EXTERNAL_FULLDIR
 
 
-### Usage
+#### Usage
 ```
 $ cd /projects/catmonitor
 $ gs-lsext
