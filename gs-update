@@ -12,7 +12,9 @@ sh $full_gs_ls 4 |
 	while read clone_dir; do 
 		if [ ! -d $clone_dir ]; then continue; fi
 		pushd $clone_dir > /dev/null || continue
+		echo "> cd into ${clone_dir} from `pwd`"
 		eval $full_0
 		popd > /dev/null
+		echo "< cd back to `pwd` from ${clone_dir}"
 	done
 

@@ -16,10 +16,14 @@ git_svn_clone_children() {
 }
 
 if [[ $1 ]] && [[ $2 ]]; then 
-	git svn clone $1 $2 || exit
-	pushd $2> /dev/null
+	repo_url=$1
+	clone_dir=$2
+	git svn clone $repo_url $clone_dir || exit
+	pushd $clone_dir> /dev/null
+	echo "> cd into ${clone_dir} from `pwd`"
 		git_svn_clone_children
 	popd > /dev/null
+	echo "< cd back to `pwd` from ${clone_dir}"
 
 elif [[ $1 ]]; then
 	echo "Usage: gs-clone REPO_URL CLONE_DIR or gs-clone to only clone externals"
